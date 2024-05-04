@@ -27,3 +27,5 @@ Run the script:
 python main.py
 ```
 Follow the on-screen prompts to add events manually, import events from a CSV file, or print upcoming events.
+
+Update the `.env` file with the required configurations. Make sure to provide necessary details such as API keys, calendar names, and other environment variables needed for the script to run smoothly.
