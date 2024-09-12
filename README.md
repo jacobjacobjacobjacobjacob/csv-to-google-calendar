@@ -17,17 +17,21 @@ pip install -r requirements.txt
 # Usage
 Clone the repository to your local machine:
 ```
-git clone https://github.com/your-username/your-repository.git
+git clone https://github.com/jacobjacobjacobjacobjacob/csv-to-google-calendar.git
 ```
 Navigate to the directory containing the script:
 ```
-cd your-repository
+cd csv-to-google-calendar
 ```
 Run the script:
 ```
-python main.py
+python3 main.py
 ```
+
+Before running the script, you have to update 'credentials.json' as described above.
+In 'config.py' you need to configure the calendar name, and the csv file name that you're working with.
 Follow the on-screen prompts to add events manually, import events from a CSV file, or print upcoming events.
+
 
 
 # To-do
