@@ -29,10 +29,12 @@ python3 main.py
 ```
 
 Before running the script, you have to update 'credentials.json' as described above.
+
 In 'config.py' you need to configure the calendar name, and the csv file name that you're working with.
+
 Follow the on-screen prompts to add events manually, import events from a CSV file, or print upcoming events.
 
 
 
 # To-do
-Export to csv
+- Export events to CSV: Add functionality to export calendar events to a CSV file.
