@@ -10,18 +10,20 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
+from config import CALENDAR_NAME, CSV_FILE
+
 # Scopes required for API access
 SCOPES = ["https://www.googleapis.com/auth/calendar"]
 
 
 # Function to retrieve the calendar ID for a given calendar name.
-def get_calendar_id(service, calendar_name):
-    # Getting the list of existing calendars
+def get_calendar_id(service, CALENDAR_NAME):
+    # Getting the list of existing calendars'
     calendars = service.calendarList().list().execute().get("items", [])
 
     # Find the calendar with the specified name
     for calendar in calendars:
-        if calendar["summary"] == calendar_name:
+        if calendar["summary"] == CALENDAR_NAME:
             return calendar["id"]
 
     # If the calendar with specified name is not found, return None
@@ -96,7 +98,6 @@ def read_events_from_csv(csv_file_path):
         for row in reader:
             events.append({
                 'summary': row['summary'],
-                'location': row['location'],
                 'description': row['description'],
                 'start': {
                     'dateTime': row['start_datetime'],
@@ -139,7 +140,8 @@ def import_events_from_csv(service, calendar_id, csv_file_path):
     print(f"\nSuccessfully added {events_created_count} events.")
 
 
-# def export_events_to_csv(calendar_id, credentials_file, csv_file):
+def export_events_to_csv(calendar_id, credentials_file, csv_file):
+    pass
 
 
 # Function to print upcoming events
@@ -189,12 +191,10 @@ def main():
         # Building Google Calendar service
         service = build("calendar", "v3", credentials=creds)
 
-        # Define which calendar to get
-        calendar_name = "INSERT CALENDAR NAME HERE"
-        calendar_id = get_calendar_id(service, calendar_name)
+        calendar_id = get_calendar_id(service, CALENDAR_NAME)
 
         if calendar_id is None:
-            print(f"Calendar '{calendar_name}' not found")
+            print(f"Calendar '{CALENDAR_NAME}' not found")
             return
 
         """
@@ -217,15 +217,14 @@ def main():
 
             if option == 1:
                 add_manual_event(service, calendar_id)
-                break
+               
             elif option == 2:
-                import_events_from_csv(service, calendar_id, "roster.csv")
-                break
+                import_events_from_csv(service, calendar_id, CSV_FILE)
+             
             elif option == 3:
-                print_upcoming_events(service, calendar_id, calendar_name)
-                break
-            elif option == 4:
-                print("Exiting program.")
+                print_upcoming_events(service, calendar_id, CALENDAR_NAME)
+               
+            elif option == 0:
                 break
             else:
                 print("Invalid option. Please choose again.")
